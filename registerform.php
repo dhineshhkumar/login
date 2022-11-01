@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registeration</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
+
 <body>
     <div class="container mt-5">
         <div class="row">
@@ -43,37 +46,37 @@
         </div>
     </div>
 </body>
+
 </html>
 <?php
 
-$conn = mysqli_connect("localhost","root","","login" );
-if(!$conn){
- die("connection error".mysqli_connect_error());
+$conn = mysqli_connect("localhost", "root", "", "login");
+if (!$conn) {
+    die("connection error" . mysqli_connect_error());
 }
 
 
-if(isset($_POST['submit'])){
+if (isset($_POST['submit'])) {
     $name = $_POST['name'];
     $email = $_POST['email'];
     $phone = $_POST['phone'];
     $password = $_POST['password'];
-    $query = mysqli_query($conn,"select * from user where email = '$email'");
-    if(mysqli_num_rows($query)>0)
-{
-    echo "email-id already use";
-}else{
+    $query = mysqli_query($conn, "select * from user where email = '$email' && name = '$name'");
+    if (mysqli_num_rows($query) > 0) {
+        echo "user already exists";
+    } else {
 
-    $insert = "insert into user(name,email,phone,password) values('$name','$email','$phone','$password')";
-         
-    $result = mysqli_query($conn, $insert);
-    
-    if($result){
-        echo "inserted successfully";
-        header('location:loginform.php');
-    }else{
-        echo "not inserted";
+        $insert = "insert into user(name,email,phone,password) values('$name','$email','$phone','$password')";
+
+        $result = mysqli_query($conn, $insert);
+
+        if ($result) {
+            echo "inserted successfully";
+            header('location:loginform.php');
+        } else {
+            echo "not inserted";
+        }
     }
-}
 }
 
 ?>
