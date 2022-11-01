@@ -57,6 +57,11 @@ if(isset($_POST['submit'])){
     $email = $_POST['email'];
     $phone = $_POST['phone'];
     $password = $_POST['password'];
+    $query = mysqli_query($conn,"select * from user where email = '$email'");
+    if(mysqli_num_rows($query)>0)
+{
+    echo "email-id already use";
+}else{
 
     $insert = "insert into user(name,email,phone,password) values('$name','$email','$phone','$password')";
          
@@ -68,6 +73,7 @@ if(isset($_POST['submit'])){
     }else{
         echo "not inserted";
     }
-};
+}
+}
 
 ?>

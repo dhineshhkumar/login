@@ -61,9 +61,9 @@ if(isset($_POST['submit'])){
         if(isset($_POST['submit'])){
             $_SESSION['f_name'] = $row['name'];
             header('location:page.php');
+        };
         }else{
-                echo 'incorrect email or password';
-        }
+            echo 'incorrect email or password';
     }
 };
 
